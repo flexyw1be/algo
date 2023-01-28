@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 #define pb push_back
 #define pf push_front
 #define F first
@@ -18,8 +19,24 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 
+string a, b;
+int i, j, m, n, k;
+
 int main() {
-    fast;
-    
-    return 0;
+    cin >> a;
+    cin >> b;
+    m = a.size();
+    n = b.size();
+    int d[m + 1][n + 1];
+    for (i = 0; i <= m; i++) d[i][0] = i;
+    for (i = 0; i <= n; i++) d[0][i] = i;
+    for (i = 1; i <= m; i++) {
+        for (j = 1; j <= n; j++) {
+            k = min(d[i - 1][j] + 1, d[i][j - 1] + 1);
+            if (a[i - 1] != b[j - 1]) { d[i][j] = min(d[i - 1][j - 1] + 1, k); }
+            else { d[i][j] = min(d[i - 1][j - 1], k); }
+        }
+    }
+
+    cout << d[m][n];
 }

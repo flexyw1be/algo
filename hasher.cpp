@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 #define pb push_back
 #define pf push_front
 #define F first
@@ -18,8 +19,32 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 
+
+struct hasher {
+    vector <ll> px, h;
+    ll x, mod;
+
+    hasher(string s, ll _x, ll _mod) {
+        x = _x;
+        mod = _mod;
+        px.pb(1);
+        h.pb(0);
+        ll k = 0;
+        loop(i, 0, s.size()) {
+            k *= x;
+            k %= mod;
+            k += s[i];
+            k %= mod;
+            px.pb((px.back() * x) % mod);
+            h.pb(k);
+        }
+    }
+
+    ll sub(ll l, ll r) {
+        return (h[r] - (h[l - 1] * px[r - l + 1]) % mod + mod) % mod;
+    }
+};
+
 int main() {
-    fast;
-    
     return 0;
 }

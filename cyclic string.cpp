@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 #define pb push_back
 #define pf push_front
 #define F first
@@ -18,8 +19,24 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 
+vector<int> prefix_function(string s) {
+    int n = (int) s.length();
+    vector<int> pi(n);
+    for (int i = 1; i < n; ++i) {
+        int j = pi[i - 1];
+        while (j > 0 && s[i] != s[j])
+            j = pi[j - 1];
+        if (s[i] == s[j]) ++j;
+        pi[i] = j;
+    }
+    return pi;
+}
+
+
 int main() {
-    fast;
-    
+    string s;
+    cin >> s;
+    vector<int> pi = prefix_function(s);
+    cout<<pi.size() - *pi.rbegin();
     return 0;
 }

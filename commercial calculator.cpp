@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 #define pb push_back
 #define pf push_front
 #define F first
@@ -18,8 +19,20 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 
+
+ll n, x, sum, res = 0;
+priority_queue<int, vector<int>, greater<int> > h;
+
 int main() {
-    fast;
-    
+    cin >> n;
+    while (n--) cin >> x, h.push(x);
+    while (h.size() > 1) {
+        sum = h.top();
+        h.pop();
+        res += sum += h.top();
+        h.pop();
+        h.push(sum);
+    }
+    printf("%.2f", res * 0.05);
     return 0;
 }
